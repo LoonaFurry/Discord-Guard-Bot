@@ -269,4 +269,4 @@ async def on_guild_join(guild):
     await guild.edit(verification_level=discord.VerificationLevel.medium, verification_delay=30)
 
 # Run the bot
-bot.run('MTA3NzMxMjMyNzUyOTAyMTU1MA.Gr1Z0F.JRf__d62bSyLhwZ-duNS1wcaJ4A5lwtUlC-wPQ')
+bot.run('Your-Token-Here')
