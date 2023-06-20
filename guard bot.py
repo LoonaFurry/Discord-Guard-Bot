@@ -72,6 +72,12 @@ async def on_ready():
         await bot.change_presence(activity=discord.Game(name=presence_with_count))
         await asyncio.sleep(delay)
 
+# Set the duration (in seconds) for which duplicate messages should be remembered
+DUPLICATE_DURATION = 5
+
+# Dictionary to store duplicate messages and their timestamps
+duplicate_messages = {}
+
 # Event handler for incoming messages
 @bot.event
 async def on_message(message):
@@ -86,22 +92,32 @@ async def on_message(message):
     if not hasattr(bot, 'message_limits'):
         bot.message_limits = {}
 
-    # Check if the message is a duplicate
+        # Check if the message is a duplicate
     if message.content in duplicate_messages:
-        # Delete the duplicate message
-        await message.delete()
+        # Get the timestamp of the duplicate message
+        timestamp = duplicate_messages[message.content]
+        current_time = time.time()
 
-        # Send a warning message
-        warning_message = await message.channel.send(f"{message.author.mention}, please refrain from sending duplicate messages.")
+        # Check if the duplicate message is still within the duration
+        if current_time - timestamp <= DUPLICATE_DURATION:
+            # Delete the duplicate message
+            await message.delete()
 
-        # Delete the warning message after 5 seconds
-        await asyncio.sleep(5)
-        await warning_message.delete()
+            # Send a warning message
+            warning_message = await message.channel.send(
+                f"{message.author.mention}, please refrain from sending duplicate messages.")
 
-        return
+            # Delete the warning message after 5 seconds
+            await asyncio.sleep(5)
+            await warning_message.delete()
 
-    # Store the message as a potential duplicate
-    duplicate_messages[message.content] = message.author.id
+            return
+        else:
+            # Remove the expired duplicate message from the dictionary
+            del duplicate_messages[message.content]
+
+        # Store the message and its timestamp as a potential duplicate
+    duplicate_messages[message.content] = time.time()
 
     # Check if the message contains swear words
     swear_label = detect_hate_speech(message.content)
@@ -270,4 +286,4 @@ async def on_guild_join(guild):
     await guild.edit(verification_level=discord.VerificationLevel.medium, verification_delay=30)
 
 # Run the bot
-bot.run('Your-Token-Here')
+bot.run('MTA3NzMxMjMyNzUyOTAyMTU1MA.Gh8Isk.N10mBxDskFHT37ewPn3qmECNny1CdlZSmH1KIg')
