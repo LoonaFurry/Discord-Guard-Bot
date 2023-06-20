@@ -148,7 +148,7 @@ async def on_message(message):
 
         return
 
-    # Limit message rate to 3 messages per second
+    # Limit message rate to 1 messages per second
     current_time = time.time()
     author_id = message.author.id
     if author_id in bot.message_limits:
