@@ -202,18 +202,19 @@ async def on_voice_state_update(member, before, after):
                 log_voice_chat(member, before.channel, after.channel)
 
 def log_chat_message(message):
-    with open("chat_history.txt", "a") as file:
+    with open("chat_history.txt", "a", encoding="utf-8") as file:
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         author_name = f"{message.author.name} ({message.author.id})"
         content = message.content
 
         file.write(f"{timestamp} | {author_name}: {content}\n")
 
+
 def log_voice_chat(member, old_voice_channel, new_voice_channel):
     if old_voice_channel is None and new_voice_channel is None:
         return  # Ignore if both old and new voice channels are None
 
-    with open("voice_history.txt", "a") as file:
+    with open("voice_history.txt", "a", encoding="utf-8") as file:
         timestamp = datetime.datetime.now(pytz.utc).strftime("%Y-%m-%d %H:%M:%S")
         member_name = f"{member.name} ({member.id})"
         old_nick = member.nick or member.name
@@ -251,7 +252,7 @@ async def on_member_update(before, after):
         log_nickname_change(member_id, nickname_history[member_id])
 
 def log_nickname_change(member_id, nickname_history):
-    with open("nickname_history.txt", "a") as file:
+    with open("nickname_history.txt", "a", encoding="utf-8") as file:
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         file.write(f"{timestamp} | Member ID: {member_id} | Nickname History: {nickname_history}\n")
 
