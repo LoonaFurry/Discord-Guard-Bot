@@ -46,7 +46,6 @@ presences = [
     "Please Be Respectful To Everyone!",
     "If Someone Is Breaking Our Rules, Please Mention This To Moderators Or Admins!",
     "Don't Break Our Rules!",
-    "Use Me Carefully!",
     "I'm Ensuring Server Safety!"
 ]
 
