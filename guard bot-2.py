@@ -178,6 +178,11 @@ log_directory = "logs"
 log_file = "anti_raid_log.txt"  # File name for the log file
 log_path = os.path.join(log_directory, log_file)
 
+log_directory = "logs"
+log_file = "member_leave_log.txt"  # File name for the log file
+log_path = os.path.join(log_directory, log_file)
+
+
 # Ensure the log directory exists
 os.makedirs(log_directory, exist_ok=True)
 
