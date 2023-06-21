@@ -181,6 +181,20 @@ log_path = os.path.join(log_directory, log_file)
 # Ensure the log directory exists
 os.makedirs(log_directory, exist_ok=True)
 
+# Event handler for guild member leave
+@bot.event
+async def on_member_remove(member):
+    log_member_leave(member)
+
+def log_member_leave(member):
+    with open("member_leave_log.txt", "a", encoding="utf-8") as file:
+        current_time = datetime.datetime.now().strftime("%H:%M:%S")
+        leave_date = datetime.datetime.now().strftime("%Y-%m-%d")
+        member_name = member.name
+        old_member_name = member.nick or None
+        member_id = member.id
+        file.write(f"{leave_date} | {current_time} | User: {member_name} | Old User: {old_member_name} | ID: {member_id}\n")
+
 # Event handler for guild member join
 @bot.event
 async def on_member_join(member):
