@@ -310,18 +310,5 @@ def log_nickname_change(member_id, nickname_history):
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         file.write(f"{timestamp} | Member ID: {member_id} | Nickname History: {nickname_history}\n")
 
-# Sample command for testing
-@bot.command()
-async def hello(ctx):
-    await ctx.send("Hello!")
-
-@bot.event
-async def on_guild_join(guild):
-    # Set the default slow mode to 10 seconds
-    await guild.edit(default_notifications=discord.ContentFilter.all(),
-                     default_notifications_level=discord.ContentFilterLevel.low)
-    # Set raid protection to 2 joins within 30 seconds
-    await guild.edit(verification_level=discord.VerificationLevel.medium, verification_delay=30)
-
 # Run the bot
 bot.run('Your-Token-Here')
