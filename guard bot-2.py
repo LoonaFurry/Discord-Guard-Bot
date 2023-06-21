@@ -22,8 +22,8 @@ else:
     device = torch.device("cpu")
 
 # Set up the Roberta model and tokenizer for Swear And Hate Speech Detection
-hate_speech_tokenizer = BertTokenizer.from_pretrained("Hate-speech-CNERG/indic-abusive-allInOne-MuRIL")
-hate_speech_model = BertForSequenceClassification.from_pretrained("Hate-speech-CNERG/indic-abusive-allInOne-MuRIL").to(device)
+hate_speech_tokenizer = BertTokenizer.from_pretrained("IMSyPP/hate_speech_en")
+hate_speech_model = BertForSequenceClassification.from_pretrained("IMSyPP/hate_speech_en").to(device)
 
 # Swear/hate speech detection function
 def detect_hate_speech(input_text):
