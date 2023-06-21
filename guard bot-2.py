@@ -7,6 +7,7 @@ import asyncio
 import datetime
 import time
 import pytz
+import os
 
 intents = discord.Intents.all()
 intents.members = True
